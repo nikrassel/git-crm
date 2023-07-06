@@ -1,10 +1,10 @@
 import { signInWithEmailAndPassword, signOut, createUserWithEmailAndPassword } from "firebase/auth";
 import { ref, set } from "firebase/database"
-import { auth, database } from "@/main";
+import { auth, database } from "@/main"
 
 export default {
     actions: {
-        async login({dispatch, commit}, {email, password}) {
+        async login({commit}, {email, password}) {
             try {
                 await signInWithEmailAndPassword(auth, email, password)
             } catch (error) {
@@ -12,8 +12,9 @@ export default {
                 throw error
             }
         },
-        async logout() {
+        async logout({commit}) {
             await signOut(auth)
+            commit('clearInfo')
         },
         async register({dispatch, commit}, {email, password, name}) {
             try {

@@ -3,6 +3,7 @@ import App from './App.vue'
 import './registerServiceWorker'
 import router from './router'
 import store from './store'
+import Loader from '@/components/app/Loader'
 import 'materialize-css'
 import 'materialize-css/dist/js/materialize.min'
 import { initializeApp } from 'firebase/app'
@@ -11,7 +12,7 @@ import { getDatabase } from "firebase/database"
 import 'firebase/database'
 
 const firebaseConfig = {
-    apiKey: "",
+    apiKey: process.env.VUE_APP_API_KEY,
     authDomain: "vue-crm-fdb.firebaseapp.com",
     projectId: "vue-crm-fdb",
     storageBucket: "vue-crm-fdb.appspot.com",
@@ -25,5 +26,5 @@ const fBase = initializeApp(firebaseConfig)
 export const auth = getAuth(fBase);
 export const database = getDatabase(fBase)
 if (fBase && auth) {
-    const app = createApp(App).use(store).use(router).mount('#app')
+    const app = createApp(App).use(store).use(router).component('Loader', Loader).mount('#app')
 }

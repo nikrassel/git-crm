@@ -1,5 +1,7 @@
 <template>
-    <div class="app-main-layout">
+    <div>
+      <Loader v-if="loading"/>
+    <div class="app-main-layout" v-else>
       <Navbar @changeState="NavbarState = !NavbarState"/>
       <Sidebar v-bind:state="NavbarState"/>
     <main class="app-content" :class="{full: !NavbarState}">
@@ -13,6 +15,7 @@
   </router-link>
 </div>
 </div>
+</div>
 </template>
 
 <script>
@@ -21,8 +24,15 @@ import Sidebar from '@/components/app/Sidebar.vue'
 export default {
   name: 'main-layout',
   data: () => ({
-    NavbarState: true
+    NavbarState: true,
+    loading: true
   }),
+  async mounted() {
+    if (!Object.keys(this.$store.getters.info).length) {
+      await this.$store.dispatch('fetchInfo')
+    }
+    this.loading = false
+  },
   components: {
     Navbar, Sidebar
   }
