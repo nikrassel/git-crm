@@ -48,9 +48,9 @@ export default {
         timeFormat: 'datetime'
     }),
     methods: {
-        logout() {
-            console.log('Logout')
-            this.$router.push('/login?message=logout')
+        async logout() {
+          await this.$store.dispatch('logout')
+          this.$router.push('/login?message=logout')
         }
     },
     computed: {
