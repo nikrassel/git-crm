@@ -29,6 +29,7 @@ export default {
     currency: null
   }),
   async mounted() {
+    await this.$store.dispatch('fetchInfo')
     this.currency = await this.$store.dispatch('fetchCurrency')
     console.log(this.currency)
     this.loading = false

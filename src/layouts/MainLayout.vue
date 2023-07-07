@@ -28,13 +28,18 @@ export default {
     loading: true
   }),
   async mounted() {
-    if (!Object.keys(this.$store.getters.info).length) {
-      await this.$store.dispatch('fetchInfo')
-    }
+    await this.$store.dispatch('fetchInfo')
+    // const userInfo = this.$store.getters.info
+    // console.log(userInfo)
+    // if (!userInfo && !userInfo.name) {
+    //   console.log('test')
+    //   await this.$store.dispatch('fetchInfo')
+    // }
     this.loading = false
   },
   components: {
     Navbar, Sidebar
   }
+  
 }
 </script>

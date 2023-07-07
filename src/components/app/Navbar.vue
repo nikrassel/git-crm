@@ -69,7 +69,8 @@ export default {
             return new Intl.DateTimeFormat('ru-Ru', options).format(new Date(this.currentDate))
         },
         userName() {
-          return this.$store.getters.info ? this.$store.getters.info.name : 'unknown'
+          const userInfo = this.$store.getters.info
+          return userInfo ? userInfo.name : 'unknown'
         }
     },
     mounted() {
