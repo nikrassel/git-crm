@@ -12,6 +12,21 @@ export default {
                 commit('setError', error)
                 throw error
             }
+        },
+        async fetchRecords({dispatch, commit}) {
+            try {
+                const uid = await dispatch('getUid')
+                const refDB = ref(database)
+                const res = await get(child(refDB, `/users/${uid}/records`))
+                const records = res.val()
+                return Object.keys(records).map(key => ({
+                    ...records[key],
+                    id: key
+                }))
+            } catch (error) {
+                commit('setError', error)
+                throw error
+            }
         }
     }
 }

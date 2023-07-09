@@ -1,59 +1,69 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import Login from '@/views/Login.vue'
+import Register from '@/views/Register.vue'
+import Categories from '@/views/Categories.vue'
+import DetailRecord from '@/views/DetailRecord.vue'
+import OperationHistory from '@/views/History'
+import Home from '@/views/Home'
+import Planning from '@/views/Planning'
+import Profile from '@/views/Profile'
+import Record from '@/views/Record'
+
 
 const routes = [
   {
     path: '/login',
     name: 'login',
     meta: {layout: 'empty'},
-    component: () => import('../views/Login.vue')
+    component: Login
   },
   {
     path: '/register',
     name: 'register',
     meta: {layout: 'empty'},
-    component: () => import('../views/Register.vue')
+    component: Register
   },
   {
     path: '/categories',
     name: 'categories',
     meta: {layout: 'main'},
-    component: () => import('../views/Categories.vue')
+    component: Categories
   },
   {
     path: '/detail',
     name: 'detail',
     meta: {layout: 'main'},
-    component: () => import('../views/DetailRecord.vue')
+    component: DetailRecord
   },
   {
     path: '/history',
     name: 'history',
     meta: {layout: 'main'},
-    component: () => import('../views/History.vue')
+    component: OperationHistory
   },
   {
     path: '/',
     name: 'homepage',
     meta: {layout: 'main'},
-    component: () => import('../views/Home.vue')
+    component: Home
   },
   {
     path: '/planning',
     name: 'planning',
     meta: {layout: 'main'},
-    component: () => import('../views/Planning.vue')
+    component: Planning
   },
   {
     path: '/profile',
     name: 'profile',
     meta: {layout: 'main'},
-    component: () => import('../views/Profile.vue')
+    component: Profile
   },
   {
     path: '/record',
     name: 'record',
     meta: {layout: 'main'},
-    component: () => import('../views/Record.vue')
+    component: Record
   }
 ]
 
