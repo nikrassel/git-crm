@@ -8,7 +8,8 @@ import Home from '@/views/Home'
 import Planning from '@/views/Planning'
 import Profile from '@/views/Profile'
 import Record from '@/views/Record'
-
+import { auth, fBase } from "@/main"
+import { getAuth, onAuthStateChanged } from "firebase/auth"
 
 const routes = [
   {
@@ -26,43 +27,43 @@ const routes = [
   {
     path: '/categories',
     name: 'categories',
-    meta: {layout: 'main'},
+    meta: {layout: 'main', auth: true},
     component: Categories
   },
   {
     path: '/detail',
     name: 'detail',
-    meta: {layout: 'main'},
+    meta: {layout: 'main', auth: true},
     component: DetailRecord
   },
   {
     path: '/history',
     name: 'history',
-    meta: {layout: 'main'},
+    meta: {layout: 'main', auth: true},
     component: OperationHistory
   },
   {
     path: '/',
     name: 'homepage',
-    meta: {layout: 'main'},
+    meta: {layout: 'main', auth: true},
     component: Home
   },
   {
     path: '/planning',
     name: 'planning',
-    meta: {layout: 'main'},
+    meta: {layout: 'main', auth: true},
     component: Planning
   },
   {
     path: '/profile',
     name: 'profile',
-    meta: {layout: 'main'},
+    meta: {layout: 'main', auth: true},
     component: Profile
   },
   {
     path: '/record',
     name: 'record',
-    meta: {layout: 'main'},
+    meta: {layout: 'main', auth: true},
     component: Record
   }
 ]
@@ -70,6 +71,17 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
+})
+
+router.beforeEach((to, from, next) => {
+  const requireAuth = to.matched.some(record => record.meta.auth)
+  setTimeout(() => {
+    if (requireAuth && !auth.currentUser) {
+      next('/login?message=login')
+    } else {
+      next()
+    }
+  }, 500)
 })
 
 export default router

@@ -23,7 +23,7 @@ const firebaseConfig = {
     databaseURL: 'https://vue-crm-fdb-default-rtdb.europe-west1.firebasedatabase.app'
   };
 
-const fBase = initializeApp(firebaseConfig)
+export const fBase = initializeApp(firebaseConfig)
 export const auth = getAuth(fBase);
 export const database = getDatabase(fBase)
 if (fBase && auth) {

@@ -1,4 +1,4 @@
-import { ref, push, child, get, update } from "firebase/database"
+import { ref, push, child, get } from "firebase/database"
 import { database } from "@/main"
 
 export default {
