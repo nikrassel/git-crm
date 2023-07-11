@@ -5,6 +5,7 @@ import router from './router'
 import store from './store'
 import Loader from '@/components/app/Loader'
 import tooltipDirective from '@/directives/tooltip.directive'
+import Paginate from "vuejs-paginate-next"
 import 'materialize-css'
 import 'materialize-css/dist/js/materialize.min'
 import { initializeApp } from 'firebase/app'
@@ -27,5 +28,5 @@ export const fBase = initializeApp(firebaseConfig)
 export const auth = getAuth(fBase);
 export const database = getDatabase(fBase)
 if (fBase && auth) {
-    const app = createApp(App).use(store).use(router).directive('tooltip', tooltipDirective).component('Loader', Loader).mount('#app')
+    const app = createApp(App).use(store).use(router).use(Paginate).directive('tooltip', tooltipDirective).component('Loader', Loader).mount('#app')
 }
