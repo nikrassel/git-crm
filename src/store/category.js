@@ -18,6 +18,18 @@ export default {
                 throw error
             }
         },
+        async fetchCategoryById({commit, dispatch}, id) {
+            try {
+                const uid = await dispatch('getUid')
+                const refDB = ref(database)
+                const res = await get(child(refDB, `/users/${uid}/categories/${id}`))
+                const category = res.val()
+                return {...category, id}
+            } catch (error) {
+                commit('setError', error)
+                throw error
+            }
+        },
         async createCategory({commit, dispatch}, {title, limit}) {
             try {
                 const uid = await dispatch('getUid')
