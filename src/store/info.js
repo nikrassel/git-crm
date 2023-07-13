@@ -14,31 +14,31 @@ export default {
         }
     },
     actions: {
-        async fetchInfo({dispatch, commit}) {
+        async fetchInfo({ dispatch, commit }) {
             try {
-                const uid = await dispatch('getUid')
+                const uid = await dispatch("getUid")
                 const refDB = ref(database)
                 const info = await get(child(refDB, `/users/${uid}/info`))
-                commit('setInfo', info.val())
+                commit("setInfo", info.val())
             } catch (error) {
-                commit('setError', error)
+                commit("setError", error)
                 throw error
             }
         },
-        async updateInfo({dispatch, commit, getters}, toUpdate) {
+        async updateInfo({ dispatch, commit, getters }, toUpdate) {
             try {
-                const uid = await dispatch('getUid')
+                const uid = await dispatch("getUid")
                 const updates = {}
                 updates[`/users/${uid}/info`] = { ...getters.info, ...toUpdate }
                 await update(ref(database), updates)
-                commit('setInfo', { ...getters.info, ...toUpdate })
+                commit("setInfo", { ...getters.info, ...toUpdate })
             } catch (error) {
-                commit('setError', error)
+                commit("setError", error)
                 throw error
             }
         }
     },
     getters: {
-        info: s => s.info
+        info: (s) => s.info
     }
 }
