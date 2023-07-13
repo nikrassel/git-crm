@@ -1,13 +1,13 @@
 <template>
     <div>
   <div class="page-title">
-    <h3>Новая запись</h3>
+    <h3>{{ $filters.localizeFilter('Menu_New_Record') }}</h3>
   </div>
 
   <Loader v-if="loading" />
-  <p class="center" v-else-if="!categories.length">Категорий пока нет. 
+  <p class="center" v-else-if="!categories.length">{{ $filters.localizeFilter('Empty_Categories') }}
     <router-link to="/categories">
-      Добавить новую категорию
+      {{ $filters.localizeFilter('Add_First_Record') }}
     </router-link>
   </p>
   <form class="form" @submit.prevent="submitHandler" v-else>
@@ -20,7 +20,7 @@
         >{{ c.title }}
         </option>
       </select>
-      <label>Выберите категорию</label>
+      <label>{{ $filters.localizeFilter('Category_Selection') }}</label>
     </div>
 
     <p>
@@ -32,7 +32,7 @@
             value="income"
             v-model="operationType"
         />
-        <span>Доход</span>
+        <span>{{ $filters.localizeFilter('income') }}</span>
       </label>
     </p>
 
@@ -45,7 +45,7 @@
             value="outcome"
             v-model="operationType"
         />
-        <span>Расход</span>
+        <span>{{ $filters.localizeFilter('outcome') }}</span>
       </label>
     </p>
 
@@ -56,10 +56,10 @@
           v-model.number="amount"
           :class="{invalid: v$.amount.$dirty && !v$.amount.minValue.$response}"
       >
-      <label for="amount">Сумма</label>
+      <label for="amount">{{ $filters.localizeFilter('Table_Amount') }}</label>
       <span class="helper-text invalid"
         v-if="v$.amount.$dirty && !v$.amount.minValue.$response"
-      >Поле сумма не должно быть меньше {{ v$.amount.minValue.$params.min }}</span>
+      >{{ $filters.localizeFilter('Amount_Error') }} {{ v$.amount.minValue.$params.min }}</span>
     </div>
 
     <div class="input-field">
@@ -69,15 +69,15 @@
           v-model="description"
           :class="{invalid: v$.description.$dirty && !v$.description.required.$response}"
       >
-      <label for="description">Описание</label>
+      <label for="description">{{ $filters.localizeFilter('Description') }}</label>
       <span
           class="helper-text invalid"
           v-if="v$.description.$dirty && !v$.description.required.$response"
-      >Поле описание не должно быть пустым</span>
+      >{{ $filters.localizeFilter('Description_Error') }}</span>
     </div>
 
     <button class="btn waves-effect waves-light" type="submit">
-      Создать
+      {{ $filters.localizeFilter('Create') }}
       <i class="material-icons right">send</i>
     </button>
   </form>

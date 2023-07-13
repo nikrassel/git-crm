@@ -2,7 +2,7 @@
     <div class="col s12 m6">
     <div>
       <div class="page-subtitle">
-        <h4>Редактировать</h4>
+        <h4>{{ $filters.localizeFilter('Edit') }}</h4>
       </div>
 
       <form @submit.prevent="submitHandler">
@@ -14,7 +14,7 @@
               :value="c.id"
             >{{ c.title }}</option>
           </select>
-          <label>Выберите категорию</label>
+          <label>{{ $filters.localizeFilter('Category_Select') }}</label>
         </div>
 
         <div class="input-field">
@@ -24,11 +24,11 @@
                   v-model="title"
                   :class="{invalid: v$.title.$dirty && !v$.title.required.$response}"
               >
-              <label for="name">Название</label>
+              <label for="name">{{ $filters.localizeFilter('Category_Name') }}</label>
               <span
                 v-if="v$.title.$dirty && !v$.title.required.$response"
                 class="helper-text invalid"
-                >Введите название категории</span>
+                >{{ $filters.localizeFilter('Category_Name_Error') }}</span>
             </div>
 
             <div class="input-field">
@@ -38,15 +38,15 @@
                   v-model.number="limit"
                   :class="{invalid: v$.limit.$dirty && !v$.limit.minValue.$response}"
               >
-              <label for="limit">Лимит</label>
+              <label for="limit">{{ $filters.localizeFilter('Limit') }}</label>
               <span
                 v-if="v$.limit.$dirty && !v$.limit.minValue.$response"
                 class="helper-text invalid"
-              >Минимальная величина {{ v$.limit.minValue.$params.min }}</span>
+              >{{ $filters.localizeFilter('Amount_Error') }} {{ v$.limit.minValue.$params.min }}</span>
             </div>
 
         <button class="btn waves-effect waves-light" type="submit">
-          Обновить
+          {{ $filters.localizeFilter('Update') }}
           <i class="material-icons right">send</i>
         </button>
       </form>

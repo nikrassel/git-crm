@@ -3,11 +3,11 @@
       <thead>
       <tr>
         <th>#</th>
-        <th>Сумма</th>
-        <th>Дата</th>
-        <th>Категория</th>
-        <th>Тип</th>
-        <th>Открыть</th>
+        <th>{{ $filters.localizeFilter('Table_Amount') }}</th>
+        <th>{{ $filters.localizeFilter('Table_Date') }}</th>
+        <th>{{ $filters.localizeFilter('Table_Category') }}</th>
+        <th>{{ $filters.localizeFilter('Table_Type') }}</th>
+        <th>{{ $filters.localizeFilter('Table_Details') }}</th>
       </tr>
       </thead>
 
@@ -18,13 +18,13 @@
         <td>{{ dateFormater(record.date) }}</td>
         <td>{{ record.categoryName }}</td>
         <td>
-          <span class="white-text badge" :class="[record.typeClass]">{{ record.typeText }}</span>
+          <span class="white-text badge" :class="[record.typeClass]">{{ $filters.localizeFilter(record.typeText) }}</span>
         </td>
         <td>
           <button 
             class="btn-small btn" 
             @click="$router.push('/detail/' + record.id)"
-            v-tooltip="'Посмотреть запись'">
+            v-tooltip="$filters.localizeFilter('Details_Tooltip')">
             <i class="material-icons">open_in_new</i>
           </button>
         </td>

@@ -1,7 +1,7 @@
 <template>
     <div>
   <div class="page-title">
-    <h3>Категории</h3>
+    <h3>{{ $filters.localizeFilter('Menu_Categories') }}</h3>
   </div>
   <section>
     <Loader v-if="loading" />
@@ -12,7 +12,7 @@
         :categories="categories" 
         @updated="updateCategories" 
         :key="categories.length + updateCount"/>
-      <p v-else class="center">Категорий пока нет</p>
+      <p v-else class="center">{{ $filters.localizeFilter('Empty_Categories') }}</p>
     </div>
   </section>
 </div>

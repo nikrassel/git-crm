@@ -3,14 +3,14 @@
       <Loader v-if="loading"/>
     <div class="app-main-layout" v-else>
       <Navbar @changeState="NavbarState = !NavbarState"/>
-      <Sidebar v-bind:state="NavbarState"/>
+      <Sidebar v-bind:state="NavbarState" :key="locale"/>
     <main class="app-content" :class="{full: !NavbarState}">
         <div class="app-page">
             <router-view />
         </div>
     </main>
 <div class="fixed-action-btn">
-  <router-link class="btn-floating btn-large blue" to="/record" v-tooltip="'Создать новую запись'">
+  <router-link class="btn-floating btn-large blue" to="/record" v-tooltip="$filters.localizeFilter('Add_Button')">
     <i class="large material-icons">add</i>
   </router-link>
 </div>
@@ -44,6 +44,9 @@ export default {
   computed: {
         error() {
             return this.$store.getters.error
+        },
+        locale() {
+          return this.$store.getters.info.locale
         }
     },
   watch: {

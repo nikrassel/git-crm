@@ -1,21 +1,21 @@
 <template>
     <div>
   <div class="page-title">
-    <h3>Планирование</h3>
+    <h3>{{ $filters.localizeFilter('Menu_Plannig') }}</h3>
     <h4>{{ userInfo.bill }}</h4>
   </div>
 
   <Loader v-if="loading"/>
-  <p class="center" v-else-if="!categories.length">Категорий пока нет. 
+  <p class="center" v-else-if="!categories.length">{{ $filters.localizeFilter('Empty_Categories') }} 
     <router-link to="/categories">
-      Добавить новую категорию
+      {{ $filters.localizeFilter('Add_First_Record') }}
     </router-link>
   </p>
   <section v-else>
     <div v-for="cat of categories" :key="cat.id">
       <p>
         <strong>{{ cat.title }}:</strong>
-        {{ cat.spend }} из {{ cat.limit }}
+        {{ cat.spend }} {{ $filters.localizeFilter('Out_Of') }} {{ cat.limit }}
       </p>
       <div class="progress" v-tooltip="cat.tooltipText">
         <div
