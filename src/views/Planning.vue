@@ -15,7 +15,7 @@
     <div v-for="cat of categories" :key="cat.id">
       <p>
         <strong>{{ cat.title }}:</strong>
-        {{ cat.spend }} {{ $filters.localizeFilter('Out_Of') }} {{ cat.limit }}
+        {{ $filters.currencyFilter(cat.spend) }} {{ $filters.localizeFilter('Out_Of') }} {{ $filters.currencyFilter(cat.limit) }}
       </p>
       <div class="progress" v-tooltip="cat.tooltipText">
         <div
@@ -31,6 +31,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import localizeFilter from '@/filters/locale.filter';
 export default {
   name: 'planning',
   data: () => ({
@@ -57,7 +58,7 @@ export default {
             ? 'yellow'
             : 'red'
         const tooltipValue = cat.limit - spend
-        const tooltipText = `${tooltipValue < 0 ? 'Превышение на' : 'Осталось'} ${Math.abs(tooltipValue)}`
+        const tooltipText = `${tooltipValue < 0 ? localizeFilter('Over_Budjet') : localizeFilter('Rest')} ${Math.abs(tooltipValue)}`
         return {
           ...cat,
           progressPercent,

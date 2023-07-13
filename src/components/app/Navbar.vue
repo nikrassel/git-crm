@@ -5,7 +5,7 @@
           <a href="#" @click.prevent="$emit('changeState')">
             <i class="material-icons black-text">dehaze</i>
           </a>
-          <span class="black-text">{{ dateFormater }}</span>
+          <span class="black-text">{{ $filters.dateFilter(this.currentDate, 'datetime') }}</span>
         </div>
 
         <ul class="right hide-on-small-and-down">
@@ -23,13 +23,13 @@
             <ul id='dropdown' class='dropdown-content'>
               <li>
                 <router-link to="/profile" class="black-text">
-                  <i class="material-icons">account_circle</i>Профиль
+                  <i class="material-icons">account_circle</i>{{ $filters.localizeFilter('ProfileTitle') }}
                 </router-link>
               </li>
               <li class="divider" tabindex="-1"></li>
               <li>
                 <a href="#" class="black-text" @click.prevent="logout">
-                  <i class="material-icons">assignment_return</i>Выйти
+                  <i class="material-icons">assignment_return</i>{{ $filters.localizeFilter('Exit') }}
                 </a>
               </li>
             </ul>
@@ -44,8 +44,7 @@ export default {
     data: () => ({
         currentDate: new Date(),
         timeChangeInterval: null,
-        dropdownFunc: null,
-        timeFormat: 'datetime'
+        dropdownFunc: null
     }),
     methods: {
         async logout() {
@@ -54,20 +53,6 @@ export default {
         }
     },
     computed: {
-        dateFormater() {
-            const options = {}
-            if (this.timeFormat.includes('date')) {
-                options.day = '2-digit'
-                options.month = 'long'
-                options.year = 'numeric'
-            }
-            if (this.timeFormat.includes('time')) {
-                options.hour = '2-digit'
-                options.minute = '2-digit'
-                options.second = '2-digit'
-            }
-            return new Intl.DateTimeFormat('ru-Ru', options).format(new Date(this.currentDate))
-        },
         userName() {
           const userInfo = this.$store.getters.info
           return userInfo ? userInfo.name : 'unknown'

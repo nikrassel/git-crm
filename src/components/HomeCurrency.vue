@@ -21,7 +21,7 @@
               >
                 <td>{{ cur }}</td>
                 <td>{{ rates[cur].toFixed(5) }}</td>
-                <td>{{ date }}</td>
+                <td>{{ $filters.dateFilter(date, 'date') }}</td>
               </tr>
             </tbody>
           </table>
@@ -34,24 +34,7 @@
 export default {
   props: ['rates', 'date'],
   data: () => ({
-    currencies: ['RUB', 'USD', 'EUR'],
-    timeFormat: 'date'
-  }),
-  computed: {
-        // dateFormater() {
-        //     const options = {}
-        //     if (this.timeFormat.includes('date')) {
-        //         options.day = '2-digit'
-        //         options.month = 'long'
-        //         options.year = 'numeric'
-        //     }
-        //     if (this.timeFormat.includes('time')) {
-        //         options.hour = '2-digit'
-        //         options.minute = '2-digit'
-        //         options.second = '2-digit'
-        //     }
-        //     return new Intl.DateTimeFormat('ru-Ru', options).format(new Date(date))
-        // }
-    }
+    currencies: ['RUB', 'USD', 'EUR']
+  })
 }
 </script>

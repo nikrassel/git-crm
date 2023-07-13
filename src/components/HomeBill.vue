@@ -8,7 +8,7 @@
             v-for="cur of currencies"
             :key="cur"
             class="currency-line">
-            <span>{{ getCurrency(cur) }} {{ cur }}</span>
+            <span>{{ $filters.currencyFilter(getCurrency(cur), cur) }}</span>
           </p>
         </div>
       </div>
@@ -26,13 +26,7 @@ export default {
       return this.$store.getters.info 
         ? this.$store.getters.info.bill / (this.rates['RUB'] / this.rates['EUR']) 
         : 0
-    },
-    // currencyFormater(value, currency = 'RUB') {
-    //   return new Intl.NumberFormat('ru-RU', {
-    //     style: 'currency',
-    //     currency
-    //   }).format(value)
-    // }
+    }
   },
   methods: {
     getCurrency(currency) {
