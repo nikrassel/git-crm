@@ -1,9 +1,13 @@
 .DS_Store
 node_modules
+templates
 /dist
+.prettierrc.js
+.firebase
 
 
 # local env files
+.env
 .env.local
 .env.*.local
 
