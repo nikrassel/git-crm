@@ -1,6 +1,6 @@
 <template>
     <div class="col s12 m6 l4">
-        <div class="card light-blue bill-card">
+        <div class="card cyan darken-1 bill-card">
             <div class="card-content white-text">
                 <span class="card-title">{{
                     $filters.localizeFilter("Currency_Account")
@@ -32,6 +32,7 @@ export default {
     },
     methods: {
         getCurrency(currency) {
+            console.log(this.base)
             return Math.floor(this.base * this.rates[currency])
         }
     }

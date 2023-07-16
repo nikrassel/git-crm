@@ -11,7 +11,7 @@
             </main>
             <div class="fixed-action-btn">
                 <router-link
-                    class="btn-floating btn-large blue"
+                    class="btn-floating btn-large cyan"
                     to="/record"
                     v-tooltip="$filters.localizeFilter('Add_Button')"
                 >
@@ -34,12 +34,6 @@ export default {
     }),
     async mounted() {
         await this.$store.dispatch("fetchInfo")
-        // const userInfo = this.$store.getters.info
-        // console.log(userInfo)
-        // if (!userInfo && !userInfo.name) {
-        //   console.log('test')
-        //   await this.$store.dispatch('fetchInfo')
-        // }
         this.loading = false
     },
     components: {

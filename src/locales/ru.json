@@ -42,5 +42,9 @@
     "Add_Button": "Создать новую запись",
     "Exit": "Exit",
     "Over_Budjet": "Превышение на",
-    "Rest": "Осталось"
+    "Rest": "Осталось",
+    "Record_Not_Found1": "Запись с id",
+    "Record_Not_Found2": "не найдена",
+    "Top_Up_Title": "Top up an account",
+    "Top_Up_Button": "Пополнить"
 }

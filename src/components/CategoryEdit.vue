@@ -64,7 +64,7 @@
                     >
                 </div>
 
-                <button class="btn waves-effect waves-light" type="submit">
+                <button class="btn waves-light" type="submit">
                     {{ $filters.localizeFilter("Update") }}
                     <i class="material-icons right">send</i>
                 </button>

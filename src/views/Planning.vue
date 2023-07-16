@@ -33,7 +33,6 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex"
 import localizeFilter from "@/filters/locale.filter"
 export default {
     name: "planning",

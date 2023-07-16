@@ -42,5 +42,9 @@
     "Add_Button": "Create the new record",
     "Exit": "Exit",
     "Over_Budjet": "Over budjet for",
-    "Rest": "Current balance"
+    "Rest": "Current balance",
+    "Record_Not_Found1": "Record with id",
+    "Record_Not_Found2": "not found",
+    "Top_Up_Title": "Top up an account",
+    "Top_Up_Button": "Top Up"
 }

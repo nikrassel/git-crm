@@ -8,9 +8,7 @@
             :exact="link.exact"
         >
             <li>
-                <a href="#" class="waves-effect waves-light btn">{{
-                    link.title
-                }}</a>
+                <a href="#" class="btn waves-light">{{ link.title }}</a>
             </li>
         </router-link>
     </ul>

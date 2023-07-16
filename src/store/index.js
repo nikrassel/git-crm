@@ -3,6 +3,8 @@ import auth from "./auth"
 import info from "./info"
 import category from "./category"
 import record from "./record"
+import { ref, child, get } from "firebase/database"
+import { database } from "@/main"
 
 export default createStore({
     state: {
@@ -26,6 +28,11 @@ export default createStore({
                 `http://data.fixer.io/api/latest?access_key=${key}&symbols=USD,EUR,RUB`
             )
             return await res.json()
+        },
+        async fetchRates() {
+            const refDB = ref(database)
+            const rates = await get(child(refDB, `/currency`))
+            return rates.val()
         }
     },
     modules: {

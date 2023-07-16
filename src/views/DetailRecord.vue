@@ -3,9 +3,9 @@
         <Loader v-if="loading" />
         <div v-else-if="record">
             <div class="breadcrumb-wrap">
-                <router-link to="/history" class="breadcrumb"
-                    >История</router-link
-                >
+                <router-link to="/history" class="breadcrumb">{{
+                    $filters.localizeFilter("Menu_History")
+                }}</router-link>
                 <a @click.prevent class="breadcrumb">
                     {{ record.typeText }}
                 </a>
@@ -14,12 +14,21 @@
                 <div class="col s12 m6">
                     <div class="card" :class="[record.typeClass]">
                         <div class="card-content white-text">
-                            <p>Описание: {{ record.description }}</p>
-                            <p>Сумма: {{ record.amount }}</p>
-                            <p>Категория: {{ record.categoryName }}</p>
+                            <p>
+                                {{ $filters.localizeFilter("Description") }}:
+                                {{ record.description }}
+                            </p>
+                            <p>
+                                {{ $filters.localizeFilter("Table_Amount") }}:
+                                {{ record.amount }}
+                            </p>
+                            <p>
+                                {{ $filters.localizeFilter("Table_Category") }}:
+                                {{ record.categoryName }}
+                            </p>
 
                             <small>{{
-                                dateFormater(record.date, "datetime")
+                                $filters.dateFilter(record.date, "datetime")
                             }}</small>
                         </div>
                     </div>
@@ -27,7 +36,9 @@
             </div>
         </div>
         <p class="center" v-else>
-            Запись с id {{ $route.params.id }} не найдена
+            {{ $filters.localizeFilter("Record_Not_Found1") }}
+            {{ $route.params.id }}
+            {{ $filters.localizeFilter("Record_Not_Found2") }}
         </p>
     </div>
 </template>
@@ -51,27 +62,9 @@ export default {
             ...record,
             categoryName: category.title,
             typeClass: record.type === "income" ? "green" : "red",
-            typeText: record.type === "income" ? "доход" : "расход"
+            typeText: record.type
         }
         this.loading = false
-    },
-    methods: {
-        dateFormater: function (recordDate, timeFormat) {
-            const options = {}
-            if (timeFormat.includes("date")) {
-                options.day = "2-digit"
-                options.month = "long"
-                options.year = "numeric"
-            }
-            if (timeFormat.includes("time")) {
-                options.hour = "2-digit"
-                options.minute = "2-digit"
-                options.second = "2-digit"
-            }
-            return new Intl.DateTimeFormat("ru-Ru", options).format(
-                new Date(recordDate)
-            )
-        }
     }
 }
 </script>
