@@ -3,6 +3,7 @@ node_modules
 templates
 /dist
 .prettierrc.js
+.firebase
 
 
 # local env files

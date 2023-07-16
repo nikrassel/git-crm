@@ -30,8 +30,8 @@ export default {
     }),
     async mounted() {
         await this.$store.dispatch("fetchInfo")
-        this.currency = await this.$store.dispatch("fetchCurrency")
-        if (this.currency.success === false) {
+        // this.currency = await this.$store.dispatch("fetchCurrency")
+        if (!this.currency || this.currency.success === false) {
             this.currency = await this.$store.dispatch("fetchRates")
         }
         this.loading = false
@@ -39,8 +39,8 @@ export default {
     methods: {
         async refresh() {
             this.loading = true
-            this.currency = await this.$store.dispatch("fetchCurrency")
-            if (this.currency.success === false) {
+            // this.currency = await this.$store.dispatch("fetchCurrency")
+            if (!this.currency || this.currency.success === false) {
                 this.currency = await this.$store.dispatch("fetchRates")
             }
             this.loading = false
