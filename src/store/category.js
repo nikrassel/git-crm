@@ -9,10 +9,14 @@ export default {
                 const refDB = ref(database)
                 const res = await get(child(refDB, `/users/${uid}/categories`))
                 const categories = res.val()
-                return Object.keys(categories).map((key) => ({
-                    ...categories[key],
-                    id: key
-                }))
+                if (categories) {
+                    return Object.keys(categories).map((key) => ({
+                        ...categories[key],
+                        id: key
+                    }))
+                } else {
+                    return null
+                }
             } catch (error) {
                 commit("setError", error)
                 throw error

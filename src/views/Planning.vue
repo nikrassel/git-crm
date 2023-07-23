@@ -6,7 +6,7 @@
         </div>
 
         <Loader v-if="loading" />
-        <p class="center" v-else-if="!categories.length">
+        <p class="center" v-else-if="!categories">
             {{ $filters.localizeFilter("Empty_Categories") }}
             <router-link to="/categories">
                 {{ $filters.localizeFilter("Add_First_Record") }}
@@ -46,34 +46,36 @@ export default {
         const records = await this.$store.dispatch("fetchRecords")
         const categories = await this.$store.dispatch("fetchCategories")
         this.userInfo = this.$store.getters.info
-        this.categories = categories.map((cat) => {
-            const spend = records
-                .filter(
-                    (record) =>
-                        record.categoryId === cat.id &&
-                        record.type === "outcome"
-                )
-                .reduce((total, record) => {
-                    return (total += +record.amount)
-                }, 0)
-            const percent = (100 * spend) / cat.limit
-            const progressPercent = percent > 100 ? 100 : percent
-            const progressColor =
-                percent < 60 ? "green" : percent < 100 ? "yellow" : "red"
-            const tooltipValue = cat.limit - spend
-            const tooltipText = `${
-                tooltipValue < 0
-                    ? localizeFilter("Over_Budjet")
-                    : localizeFilter("Rest")
-            } ${Math.abs(tooltipValue)}`
-            return {
-                ...cat,
-                progressPercent,
-                progressColor,
-                spend,
-                tooltipText
-            }
-        })
+        if (records && categories) {
+            this.categories = categories.map((cat) => {
+                const spend = records
+                    .filter(
+                        (record) =>
+                            record.categoryId === cat.id &&
+                            record.type === "outcome"
+                    )
+                    .reduce((total, record) => {
+                        return (total += +record.amount)
+                    }, 0)
+                const percent = (100 * spend) / cat.limit
+                const progressPercent = percent > 100 ? 100 : percent
+                const progressColor =
+                    percent < 60 ? "green" : percent < 100 ? "yellow" : "red"
+                const tooltipValue = cat.limit - spend
+                const tooltipText = `${
+                    tooltipValue < 0
+                        ? localizeFilter("Over_Budjet")
+                        : localizeFilter("Rest")
+                } ${Math.abs(tooltipValue)}`
+                return {
+                    ...cat,
+                    progressPercent,
+                    progressColor,
+                    spend,
+                    tooltipText
+                }
+            })
+        }
         this.loading = false
     }
 }

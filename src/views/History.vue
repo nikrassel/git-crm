@@ -9,7 +9,7 @@
             <Pie :options="chartOptions" :data="chartData" />
         </div>
         <Loader v-if="loading" />
-        <p class="center" v-else-if="!records.length">
+        <p class="center" v-else-if="!records">
             {{ $filters.localizeFilter("Empty_History") }}
             <router-link to="/record">{{
                 $filters.localizeFilter("Add_First_Record")
@@ -80,7 +80,9 @@ export default {
         await this.$store.dispatch("fetchInfo")
         this.records = await this.$store.dispatch("fetchRecords")
         const categories = await this.$store.dispatch("fetchCategories")
-        this.setup(categories)
+        if (categories && this.records) {
+            this.setup(categories)
+        }
         this.loading = false
     },
     methods: {
