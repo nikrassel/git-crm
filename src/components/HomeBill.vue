@@ -32,7 +32,6 @@ export default {
     },
     methods: {
         getCurrency(currency) {
-            console.log(this.base)
             return Math.floor(this.base * this.rates[currency])
         }
     }

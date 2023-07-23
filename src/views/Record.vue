@@ -3,9 +3,8 @@
         <div class="page-title">
             <h3>{{ $filters.localizeFilter("Menu_New_Record") }}</h3>
         </div>
-
         <Loader v-if="loading" />
-        <p class="center" v-else-if="!categories.length">
+        <p class="center" v-else-if="!categories">
             {{ $filters.localizeFilter("Empty_Categories") }}
             <router-link to="/categories">
                 {{ $filters.localizeFilter("Add_First_Record") }}
@@ -126,7 +125,7 @@ export default {
         await this.$store.dispatch("fetchInfo")
         this.categories = await this.$store.dispatch("fetchCategories")
         this.loading = false
-        if (this.categories.length) {
+        if (this.categories) {
             this.category = this.categories[0].id
         }
         setTimeout(() => {

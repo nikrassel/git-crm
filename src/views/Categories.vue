@@ -8,7 +8,7 @@
             <div class="row" v-else>
                 <CategoryCreate @created="addNewCategory" />
                 <CategoryEdit
-                    v-if="categories.length"
+                    v-if="categories"
                     :categories="categories"
                     @updated="updateCategories"
                     :key="categories.length + updateCount"
